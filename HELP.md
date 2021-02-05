@@ -1,8 +1,17 @@
-# Getting Started
+# Spring Security
+
+## Authentication Configuration
 
 To configure spring security, Authentication Manager is what does the authentication, this class has authenticate()
-method which either returns a successful authentication or throws an error. You configure such manager with
-authentication manager builder class.You can get the builder by extending WebSecurityConfigurerAdapter
+method which either returns a successful authentication or throws an error. You configure such a manager with
+authentication manager builder class.You can get the builder by extending WebSecurityConfigurerAdapter and override
+configure(AuthManagerBuilder auth)
+
+## Authorization Configuration
+
+With HttpSecurity you define restrictions on a path. You can get this object by extending WebSecurityConfigurerAdapter
+and override configure(HttpSecurity security). Go from most restrictive to least (eg. specify ant matchers on admins
+urls first then on normal users)
 
 ### Reference Documentation
 
