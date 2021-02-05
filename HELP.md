@@ -1,6 +1,11 @@
 # Getting Started
 
+To configure spring security, Authentication Manager is what does the authentication, this class has authenticate()
+method which either returns a successful authentication or throws an error. You configure such manager with
+authentication manager builder class.You can get the builder by extending WebSecurityConfigurerAdapter
+
 ### Reference Documentation
+
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
@@ -11,6 +16,7 @@ For further reference, please consider the following sections:
 * [Spring Web](https://docs.spring.io/spring-boot/docs/2.4.2/reference/htmlsingle/#boot-features-developing-web-applications)
 
 ### Guides
+
 The following guides illustrate how to use some features concretely:
 
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
