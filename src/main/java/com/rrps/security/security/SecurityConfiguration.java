@@ -6,7 +6,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -32,12 +31,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // make authentication based on database
         // the datasource here is injected with spring based on classpath
         // since h2 is present -> spring will choose it as dependency and inject it
-        // the database is built with default schema -> i.e a user and authorities table
-        auth.jdbcAuthentication().dataSource(dataSource).withDefaultSchema().withUser(
-                User.withUsername("user").password("12345").roles("USER")
-        ).withUser(
-                User.withUsername("admin").password("12345").roles("ADMIN", "USER")
-        );
+        // the database is built with schema which is found in schema.sql in resource
+        // directory root, data.sql is used to populate users
+        // since schema in schema.sql is the default one
+        // no need to till spring how to authenticate the user
+        // based on the schema
+        auth.jdbcAuthentication().dataSource(dataSource);
     }
 
 
