@@ -13,6 +13,19 @@ With HttpSecurity you define restrictions on a path. You can get this object by 
 and override configure(HttpSecurity security). Go from most restrictive to least (eg. specify ant matchers on admins
 urls first then on normal users)
 
+## How Security Authentication Works
+
+Spring add security to your app by using Filters. A filter is a construct that intercepts your http requests before it
+goes to a servlet. AuthenticationProvider is the one that do the actual authentication, Authentication will hold the
+principal eventually.
+
+The filter takes credentials as input then delegate that into authentication manager which chooses between different
+providers (eg. LDAP, Basic authentication) the provider authenticate the user by getting back its details (eg. from a
+DB) then if the user is successfully authenticated, its principals gets returned to the filter, otherwise an excepetion
+occurs and the filter should respond to that exception.
+
+![Spring Security](https://i.ibb.co/fvqRqpj/Screenshot-from-2021-02-06-17-19-10.png)
+
 ### Reference Documentation
 
 For further reference, please consider the following sections:
