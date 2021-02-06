@@ -36,7 +36,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // since schema in schema.sql is the default one
         // no need to till spring how to authenticate the user
         // based on the schema
-        auth.jdbcAuthentication().dataSource(dataSource);
+        // if you need to get with different schema
+        // then add the queries that tells how to get username password enable
+        // and queries that tells how to get username authority
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("select username,password,enable from users where username=?").
+                authoritiesByUsernameQuery("select username,authority from authorities where username=?");
     }
 
 
