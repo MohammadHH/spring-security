@@ -1,11 +1,6 @@
-insert into users(username, password, enabled)
-values ('user', '12345', true);
+insert into user(email, password, active, roles)
+values ('user@gmail.com', '12345', true, 'ROLE_USER');
 
-insert into users(username, password, enabled)
-values ('admin', '12345', true);
+insert into user(email, password, active, roles)
+values ('admin@gmail.com', '12345', true, 'ROLE_ADMIN');
 
-insert into authorities (username, authority)
-values ('user', 'ROLE_USER');
-
-insert into authorities (username, authority)
-values ('admin', 'ROLE_ADMIN');
