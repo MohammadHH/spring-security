@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,10 +14,12 @@ import java.util.Optional;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public MyUserDetailsService(UserRepository userRepository) {
+    public MyUserDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class MyUserDetailsService implements UserDetailsService {
     public User createUser(AuthenticationRequestModel model) {
         return userRepository.save(
                 new User(model.getEmail(),
-                        new BCryptPasswordEncoder().encode(model.getPassword()),
+                        passwordEncoder.encode(model.getPassword()),
                         "ROLE_USER", true)
         );
     }

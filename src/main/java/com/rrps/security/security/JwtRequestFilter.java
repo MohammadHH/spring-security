@@ -42,7 +42,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.replace("Bearer ", "");
             // here if token is malformed an exception will occur
-            System.out.println("The token" + token);
             email = utils.extractEmail(token);
         }
         // if getAuthentication=null -> this means that theres no security context until now
